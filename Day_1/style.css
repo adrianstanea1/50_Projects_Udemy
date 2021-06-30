@@ -1,5 +1,5 @@
 /* We can import css like this */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
 
 /* Universal selector to undo default behabiour */
@@ -8,10 +8,9 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Muli', sans-serif;
     margin: 0;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     /* I give the body the ability to exapnd fully to the screen size so that i stays centered */
@@ -19,3 +18,64 @@ body {
     /* Scrollbars wont show when content overflows */
     overflow: hidden;
 }
+
+.container {
+    display: flex;
+    width: 90vw;
+}
+
+
+
+.panel {
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: repeat;
+    height: 80vh;
+    border-radius: 4em;
+
+    cursor: pointer;
+    /* How they can expand  */
+    flex: 0.5;
+    margin: 10px;
+    /* The content inside will be  placed relative to the parent and not the hole page when i use absolute inside a nested child */
+    position: relative;
+    transition: flex 700ms ease-in;
+}
+
+.panel h3 {
+    font-size: 1.4em;
+    /* Absolute so that i can use bottom and left, since i m inside a relative container, the content will be placed relative to it */
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    margin: 0;
+    /* Opacity 0 means we cant see the content, then when i make it visible i make the text readable */
+    opacity: 0;
+
+    color: #000C66;
+    background-color: #cfdadd;
+    border: 1px solid #2E8BC0;
+    border-radius: 2em;
+    padding: 0.2em 0.5em;
+}
+
+.panel.active {
+    flex: 5;
+}
+
+.panel.panel.active h3 {
+    opacity: 1;
+    transition: opacity 300ms ease-in 400ms;
+}
+
+/* What i set here takes place only under this value */
+@media(max-width: 480px) {
+    .container {
+        width: 100vw;
+    }
+
+    .panel:nth-of-type(4), .panel:nth-of-type(5) {
+        display: none;
+    }
+}
+
