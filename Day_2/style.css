@@ -6,7 +6,7 @@
   --line-border-empty: #e0e0e0;
 }
 
-/* Universal selector to undo default behabiour */
+/* Universal selector to undo default behaviour */
 * {
   box-sizing: border-box;
 }
@@ -29,6 +29,7 @@ body {
   text-align: center;
 }
 
+/* Position the container that has the circles with numbers */
 .progress-container {
   display: flex;
   justify-content: space-between;
@@ -38,6 +39,8 @@ body {
   width: 350px;
 }
 
+/* The gray line that sits behind the scenes */
+/* I dont understant how the top and transform are used both to move the line */
 .progress-container::before {
   content: "";
   background-color: var(--line-border-empty);
@@ -50,6 +53,8 @@ body {
   z-index: -1;
 }
 
+/* This stacks on top of the gray line and gives the sensation that it feels in the transition */
+/* Initially we have no style aplied, hence the width is 0 */
 .progress {
   background-color: var(--line-border-fill);
   position: absolute;
@@ -62,6 +67,8 @@ body {
   transition: 400ms ease;
 }
 
+/* Style the circles, they are divs with a specific width and border radios to create circles
+  the flex is used to center the content inside them, the numbers themselves */
 .circle {
   background-color: #fff;
   color: #999;
@@ -92,14 +99,18 @@ body {
   font-size: 14px;
 }
 
+/* Shrink the size a little bit when i press, with no transition for instant feedback */
 .btn:active {
-  transform: scale(0.98);
+  transform: scale(0.95);
 }
 
+/* Visual feedback, it shrinks just a little bit when pressed bcs the outline gets erased */
 .btn:focus {
   outline: 0;
 }
 
+/* When the btn has the atribute disabled i changed the way the cursor shows when i hover over it 
+  and give virsual response with the bg color*/
 .btn:disabled {
   background-color: var(--line-border-empty);
   cursor: not-allowed;

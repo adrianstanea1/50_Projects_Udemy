@@ -1,0 +1,154 @@
+/* We can import css like this */
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+/* Universal selector to undo default behabiour */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #333;
+  color: #222;
+  /* The overflox x means that i wont have a bar to scroll on the x axis when the content overflows, i guess it will somehow wrap around then */
+  overflow-x: hidden;
+  /* Margin 0  -- the items will be right next to the box edges on the body */
+  margin: 0;
+}
+
+.container {
+  background-color: #fafafa;
+  /* By default it rotates from the center of the box, i change it so that i get the efect that rotates from the top corner */
+  transform-origin: top left;
+  transition: transform 0.5s linear;
+  /* Ocupy the entire view port horizontally */
+  width: 100vw;
+  /* The container will thake the entire view port */
+  min-height: 100vh;
+  padding: 50px;
+}
+.container.show-nav {
+  transform: rotate(-20deg);
+}
+
+/* You can tweek the values here to see how the icons are placed inside */
+.circle-container {
+  position: fixed;
+  /* The buttons dont show this way - we drag the up and left by 100 px out of the page*/
+  top: -100px;
+  left: -100px;
+}
+
+.circle {
+  background-color: #ff7979;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  /* SO that i can place the items inside of it absolute */
+  position: relative;
+  transition: transform 0.5s linear;
+}
+
+.container.show-nav .circle {
+  transform: rotate(-70deg);
+}
+
+.circle button {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100px;
+  background: transparent;
+  border: 0;
+  font-size: 26px;
+  color: #fff;
+}
+
+/* Dont show the outline when i press the btn */
+.circle button:focus {
+  outline: none;
+}
+
+.circle button#open {
+  left: 60%;
+}
+
+/* Relative to the circe???? */
+.circle button#close {
+  top: 60%;
+  transform: rotate(90deg);
+  transform-origin: top left;
+}
+
+.container.show-nav + nav li {
+  transform: translateX(0);
+  transition-delay: 0.3s;
+}
+
+/* Here i target the nav from down the page */
+nav {
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  /* It stays on top of everything else */
+  z-index: 100;
+}
+
+nav ul {
+  list-style-type: none;
+  padding-left: 30px;
+}
+
+nav ul li {
+  text-transform: uppercase;
+  color: #fff;
+  margin: 40px 0;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-in;
+}
+
+/* I target the li after the initial one */
+nav ul li + li {
+  margin-left: 15px;
+  transform: translateX(-150%);
+}
+/* The second after, it seems to be a diagonal  */
+nav ul li + li + li {
+  margin-left: 30px;
+  transform: translateX(-200%);
+}
+
+nav ul li i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.content-img {
+  /* With this line only the img scales down or up when the  window resizes, without it overflows
+    The percentage seems to be based on the parent size, which has padding, so the img respects it when it grows*/
+  max-width: 100%;
+}
+
+.content {
+  /* The content can grow up to that value in width, when we pass that value it stops growing, when we dont have enough space it shrinks to fit */
+  max-width: 1000px;
+  /* This keeps it centered when we hit the max width */
+  margin: 50px auto;
+}
+/* It bring the txt near it closer since it s the only thing that margin would affect since i placed it inside a container */
+.content h1 {
+  margin: 0;
+  text-align: center;
+}
+
+.content small {
+  color: #555;
+  font-style: italic;
+}
+
+.content p {
+  color: #333;
+  line-height: 1.5;
+  text-align: justify;
+}
